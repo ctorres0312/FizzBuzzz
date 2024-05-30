@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: A Coding Project by Christian Torres</title>
+    <title>Fizz Buzz: A Coding Project by Christian Torres</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -48,7 +48,7 @@
             src="img/CT_logo_white.png"
             width="50"
             class="d-inline-block"
-          />APP NAME</a
+          />Fizz Buzz</a
         >
         <button
           class="navbar-toggler"
@@ -75,7 +75,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">Git Repo</a>
+              <a class="nav-link" target="_blank" href="https://github.com/ctorres0312/FizzBuzzz">Git Repo</a>
             </li>
             <li class="nav-item">
               <a
@@ -93,21 +93,113 @@
     <!-- ==== Main Section ==== -->
     <main class="flex-shrink-0">
       <div class="container py-5 px-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for App Name.</h2>
+        <h2 class="border-1 border-bottom border-dark">The Code for Fizz Buzz.</h2>
         <div class="row row-cols-1 row-cols-lg-2">
           <div class="col-lg-8">
             <pre class="line-numbers"><code class="language-javascript">
-              //Call Hello World
-              function helloWorld() {
-                alert("Hello World");
+              //Get values from the user. We need to get the fizz and the buzz value.
+              function getValues () {
+              
+                  //Get the user values from the page
+                  let fizzValue = document.getElementById("fizzValue").value;
+                  let buzzValue = document.getElementById("buzzValue").value;
+              
+                  //parse for numbers
+                  fizzValue = parseInt(fizzValue);
+                  buzzValue = parseInt(buzzValue);
+                  //Check that the numbers are integers
+                  if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+                  //We call fizzBuzz
+                      let fbArray = fizzBuzz(fizzValue, buzzValue);
+                  //Call displayData and write the values to the screen
+                      displayData(fbArray);
+                  } else {
+                      alert("You must enter a integer");
+                  }
+              
+                 
               }
+              //Do fizz buzz
+              function fizzBuzz(fizzValue, buzzValue) {
+                  let returnArray = [];
+              
+                  //loop from 1 to 100
+                  for (let i = 1; i <= 100; i++) {
+                      //Check to see if divisible by both (3 and 5)
+                      //Check to see if divisible by fizz value(3) 
+                      //Check to see if divisible by buzz value(5)
+                      if(i % fizzValue == 0 && i % buzzValue == 0) {
+                          returnArray.push('FizzBuzz');
+                      } else if (i % fizzValue == 0) {
+                          returnArray.push('Fizz');
+                      } else if(i % buzzValue == 0){
+                          returnArray.push('Buzz');
+                      } else {
+                          returnArray.push(i);
+                      }
+                  }
+              
+              
+                  return returnArray;
+              }
+              
+              //loop over the array and create a tablerow for each item
+              function displayData(fbArray) {
+                  //get the table body element from the page
+                  let tableBody = document.getElementById("results");
+              
+                  //get the template row
+                  let templateRow = document.getElementById("fbTemplate");
+              
+                  //clear table first
+                  tableBody.innerHTML = "";
+              
+                  for (let i = 0; i < fbArray.length; i+= 5) {
+                      let tableRow = document.importNode(templateRow.content, true)
+                      
+              
+                      let rowCols = tableRow.querySelectorAll("td");
+                      rowCols[0].classList.add(fbArray[i]);
+                      rowCols[0].textContent = fbArray[i];
+              
+                      rowCols[1].classList.add(fbArray[i+1]);
+                      rowCols[1].textContent = fbArray[i+1];
+              
+                      rowCols[2].classList.add(fbArray[i+2]);
+                      rowCols[2].textContent = fbArray[i+2];
+              
+                      rowCols[3].classList.add(fbArray[i+3]);
+                      rowCols[3].textContent = fbArray[i+3];
+              
+                      rowCols[4].classList.add(fbArray[i+4]);
+                      rowCols[4].textContent = fbArray[i+4];
+              
+                      tableBody.appendChild(tableRow);
+              
+              
+                  }
+                  
               </code>
             </pre>
           </div>
           <div class="col-lg-4">
-            <p>The Code is structed in one function.</p>
-            <h5>Hello World</h5>
-            <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+            <p>The Code is constructed in three functions.</p>
+            <p>
+              *some code may not show via prism. See source to see complete
+              code.
+            </p>
+            <h5>getValues</h5>
+            <p>
+              The "getValues" function retrieves, parses, and validates integer inputs from the user for "fizz" and "buzz" values, generates a FizzBuzz array using these values, and displays the results. If the inputs are invalid, it alerts the user.
+            </p>
+            <h5>fizzBuzz</h5>
+            <p>
+              The "fizzBuzz" function generates an array of numbers from 1 to 100, replacing multiples of `fizzValue` with "Fizz", multiples of `buzzValue` with "Buzz", and multiples of both with "FizzBuzz".
+            </p>
+            <h5>displayData</h5>
+            <p>
+              The "displayData" function iterates over the `fbArray`, creating a table row for each set of five items, and populates the table body element with these rows using a template row from the document.
+            </p>
           </div>
         </div>
       </div>
